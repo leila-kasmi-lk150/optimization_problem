@@ -1,8 +1,6 @@
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -48,6 +46,7 @@ public class Main {
         }
         
         // greedy algorithm
+        System.out.println("====== Greedy Algorithm ======");
         ArrayList<Integer> route = new ArrayList<>();
         route.add(0);
         int nextNoeud=0;
@@ -63,53 +62,44 @@ public class Main {
                     nextNoeud = j;
                 }
             }
+            System.out.println("Des["+getNoeuds+"]["+nextNoeud+ "] --->" +Des[getNoeuds][nextNoeud]);
             destance+=Des[getNoeuds][nextNoeud];
             route.add(nextNoeud);
             NoeudsExist--;
         }
-        System.out.println("====== Greedy Algorithm ======");
-        System.out.println("low cost cycle using Greedy Algorithm: " + route);
+        
+        System.out.println("Low cost cycle using Greedy Algorithm: " + route);
         System.out.println("Total Distance: "+destance);
         
         // Random Search
+        System.out.println("====== Random Search ======");
         ArrayList<Integer> route2 = new ArrayList<>();
         route2.add(0);
-        int NoeudsExist2 = noeuds-1;
         int getNoeuds2=0;
         double destance2=0;
-        int randomValue=0;
-        
-        
-        List<Integer> allNoeuds = new ArrayList<>();
-        int x = noeuds;
+        ArrayList<Integer> allNoeuds = new ArrayList<>();
         for (int i = 0; i < noeuds; i++) {
             allNoeuds.add(i);
         }
-        // Shuffle the list
         Collections.shuffle(allNoeuds);
         //while(NoeudsExist2>0){
-           /*getNoeuds2=randomValue;
+           /*getNoeuds2=randomNoeud;
             do {
-                randomValue = random.nextInt(noeuds-1);
-            } while (route.contains(randomValue));
-            destance2+=Des[getNoeuds2][randomValue];
+                randomNoeud = random.nextInt(noeuds-1);
+            } while (route.contains(randomNoeud));
+            destance2+=Des[getNoeuds2][randomNoeud];
             */
-        for (int value : allNoeuds) {
-            
-            if (!route2.contains(value)) {
-                route2.add(value);
-                destance2+=Des[getNoeuds2][value];
-                System.out.println("getNoeuds2: "+getNoeuds2+"value: "+value+ "--->" +Des[getNoeuds2][value]);
-                getNoeuds2=value;
-                if (route2.size() == x) {
-                    break;
-                }
+        for (int i : allNoeuds) {
+            if (!route2.contains(i)) {
+                route2.add(i);
+                destance2+=Des[getNoeuds2][i];
+                System.out.println("Des["+getNoeuds2+"]["+i+ "] --->" +Des[getNoeuds2][i]);
+                getNoeuds2=i;
             }
-            
         }
             //NoeudsExist2--;
         //}
-        System.out.println("====== Random Search ======");
+        
         System.out.println("low cost cycle using Random Search: " + route2);
         System.out.println("Total Distance: "+destance2);
     }
